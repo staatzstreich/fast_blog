@@ -2,72 +2,21 @@
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
-<f:asset.css identifier="fastblog-fonts" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;800&display=swap" />
+<f:comment>
+    Minimal layout: page chrome (nav/footer/theme) is provided by the active
+    theme set (e.g. theme_daisy with its daisyUI navbar). The blog only
+    brings its own stylesheet and maps its color tokens onto daisyUI
+    variables with standalone fallbacks (see Blog.css).
+    Post-specific language links stay in Show.html (.lang-switch) because
+    they need the per-post translation counterparts, not a generic menu.
+</f:comment>
+
 <f:asset.css identifier="fastblog-css" href="EXT:fast_blog/Resources/Public/Css/Blog.css" />
-<f:asset.script identifier="fastblog-theme-init" priority="1">
-    (function () {
-        var saved = localStorage.getItem('blog-theme');
-        if (saved) {
-            document.documentElement.setAttribute('data-theme', saved);
-        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-            document.documentElement.setAttribute('data-theme', 'light');
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-    })();
-</f:asset.script>
 
 <div class="blog-scope">
-    <nav class="blog-nav">
-        <a class="nav-logo" href="/">staatzstreich</a>
-        <ul class="nav-links">
-            <li><f:link.action action="list" controller="Blog">Blog</f:link.action></li>
-            <li><a href="https://github.com/staatzstreich" target="_blank" rel="noreferrer">GitHub &#8594;</a></li>
-
-            <f:if condition="{siteLanguages}">
-                <li class="lang-menu">
-                    <f:for each="{siteLanguages}" as="siteLanguage">
-                        <f:if condition="{siteLanguage.languageId} == {currentLanguageId}">
-                            <f:then>
-                                <span class="lang-menu-current" title="{siteLanguage.title}">{siteLanguage.code}</span>
-                            </f:then>
-                            <f:else>
-                                <f:link.page language="{siteLanguage.languageId}" hreflang="{siteLanguage.hreflang}">
-                                    {siteLanguage.code}
-                                </f:link.page>
-                            </f:else>
-                        </f:if>
-                    </f:for>
-                </li>
-            </f:if>
-
-            <li>
-                <button class="theme-toggle" type="button" onclick="blogToggleTheme()" aria-label="Toggle theme">
-                    <span class="icon-moon">&#127769;</span>
-                    <span class="icon-sun">&#9728;&#65039;</span>
-                </button>
-            </li>
-        </ul>
-    </nav>
-
     <main class="blog-main">
         <f:render section="Main"/>
     </main>
-
-    <footer class="blog-footer">
-        <span><a href="/">staatzstreich.de</a></span>
-        <span><a href="https://github.com/staatzstreich" target="_blank" rel="noreferrer">GitHub</a></span>
-    </footer>
 </div>
-
-<f:asset.script identifier="fastblog-theme-toggle">
-    function blogToggleTheme() {
-        var html = document.documentElement;
-        var current = html.getAttribute('data-theme');
-        var next = current === 'dark' ? 'light' : 'dark';
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('blog-theme', next);
-    }
-</f:asset.script>
 
 </html>

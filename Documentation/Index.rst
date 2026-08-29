@@ -15,6 +15,15 @@ YAML frontmatter in :file:`fileadmin` and imported into TYPO3 by a CLI
 command. On the website they are displayed with a blog list (pagination and
 tag filter) plus a detail view.
 
+The extension deliberately ships no page chrome (nav, footer, theme):
+that is the job of the active site theme (e.g. a daisyUI-based theme set
+providing the navigation and the color scheme). The blog's stylesheet
+maps its color tokens onto the theme's CSS variables - including
+``data-theme``-driven schemes like daisyUI - with standalone fallbacks,
+so it renders reasonably even without any theme. Post-specific language
+links are kept inside the blog (see below) because they depend on the
+per-post translations, not on the page layout.
+
 .. ==================================================
 .. TABLE OF CONTENTS
 .. ==================================================
@@ -289,16 +298,15 @@ everything from the existing TYPO3 site configuration:
 - **Linking**: files sharing the same `translationKey` are linked as
   TYPO3 translations (:code:`l10n_parent`), no matter which file gets
   imported first.
-- **Display**: the list view's header nav contains a generic language
-  menu built from the languages defined in your site configuration
-  (labelled by ISO code, active language highlighted, no link to itself).
-  The detail view instead checks which counterpart translations of the
-  current post exist and renders a switcher pointing to the translated
+- **Display**: the detail view checks which counterpart translations of
+  the current post exist and renders a switcher pointing to the translated
   post - URLs are generated through the site's own routing (including
   your route enhancer), so each language's base URL and slug handling is
-  respected automatically. A generic menu cannot link to a translated
-  post (the slug differs per language), which is why the two views use
-  different switchers.
+  respected automatically. The list view currently leaves language
+  switching to the page chrome (e.g. the theme's navbar): a generic menu
+  cannot link to a translated post (the slug differs per language), so a
+  post-specific switcher would be needed there - this may be added as a
+  daisyUI dropdown at theme level.
 
 If a site has only one language, everything above is a no-op: all posts
 land in the default language and no switcher is shown. Both sides follow

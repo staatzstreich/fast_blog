@@ -27,7 +27,6 @@ use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Pagination\ArrayPaginator;
 use TYPO3\CMS\Core\Pagination\SimplePagination;
 use TYPO3\CMS\Core\Site\Entity\Site;
-use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -77,8 +76,6 @@ final class BlogController extends ActionController
             'paginator' => $paginator,
             'blogCategories' => $this->blogPostRepository->findDistinctCategories(),
             'currentCategory' => $category,
-            'currentLanguageId' => $this->getCurrentLanguageId(),
-            'siteLanguages' => $this->getSiteLanguages(),
         ]);
 
         return $this->htmlResponse();
@@ -88,52 +85,10 @@ final class BlogController extends ActionController
     {
         $this->view->assignMultiple([
             'post' => $post,
-            'currentLanguageId' => $this->getCurrentLanguageId(),
             'translations' => $this->findTranslations($post),
         ]);
 
         return $this->htmlResponse();
-    }
-
-    private function getCurrentLanguageId(): int
-    {
-        $language = $this->request->getAttribute('language');
-
-        return $language instanceof SiteLanguage ? $language->getLanguageId() : 0;
-    }
-
-    /**
-     * All languages of the current site, straight from the site configuration -
-     * no extension setting involved. Used by the layout's generic language menu
-     * (list view); the detail view instead links post-specific counterparts.
-     *
-     * @return array<array{languageId: int, code: string, title: string}>
-     */
-    private function getSiteLanguages(): array
-    {
-        $site = $this->request->getAttribute('site');
-        if (!$site instanceof Site) {
-            return [];
-        }
-
-        $languages = [];
-        foreach ($site->getAllLanguages() as $language) {
-            if (!$language->isEnabled()) {
-                continue;
-            }
-
-            $languages[] = [
-                'languageId' => $language->getLanguageId(),
-                'hreflang' => $language->getHreflang(),
-                // hreflang ("en-US", "de-DE", "ja-JP") is the only per-language
-                // identifier guaranteed to exist in site config and never to be
-                // TYPO3's literal "default" for the default language.
-                'code' => strtoupper(substr($language->getHreflang(), 0, 2)),
-                'title' => $language->getTitle(),
-            ];
-        }
-
-        return $languages;
     }
 
     /**
