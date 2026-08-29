@@ -6,8 +6,8 @@
 <f:section name="Main">
 
     <header class="blog-hero">
-        <div class="hero-tag">Blog</div>
-        <h1>Thoughts &amp; <span>Notes</span></h1>
+        <div class="hero-tag"><f:translate key="list.heroTag" extensionName="FastBlog" /></div>
+        <h1><f:translate key="list.title" extensionName="FastBlog" /></h1>
         <p class="hero-sub"><f:translate key="list.tagline" extensionName="FastBlog" /></p>
     </header>
 
@@ -67,7 +67,7 @@
 
         <f:if condition="{blogCategories}">
             <aside class="tag-sidebar">
-                <span class="filter-label">Tags</span>
+                <span class="filter-label"><f:translate key="list.tags" extensionName="FastBlog" /></span>
                 <div class="filter-tags">
                     <f:if condition="{currentCategory}">
                         <f:link.action action="list" class="filter-tag"><f:translate key="list.all" extensionName="FastBlog" /></f:link.action>

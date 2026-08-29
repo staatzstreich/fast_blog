@@ -1,5 +1,5 @@
-# cat=basic/1; type=string; label=Verzeichnis der Markdown-Dateien, relativ zum Docroot
+# cat=basic/1; type=string; label=Directory of the Markdown files, relative to the docroot
 outputDirectory = fileadmin/blog_posts
 
-# cat=basic/2; type=int; label=Seiten-UID des Sysordners, in den "fastblog:import" die BlogPost-Datensätze schreibt
+# cat=basic/2; type=int; label=Page UID of the sysfolder into which "fastblog:import" writes the BlogPost records
 blogStoragePid = 0

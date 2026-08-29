@@ -6,6 +6,15 @@
             <trans-unit id="list.tagline" resname="list.tagline">
                 <source>A collection of ideas, experiments and technical notes.</source>
             </trans-unit>
+            <trans-unit id="list.heroTag" resname="list.heroTag">
+                <source>Blog</source>
+            </trans-unit>
+            <trans-unit id="list.title" resname="list.title">
+                <source>Thoughts &amp; Notes</source>
+            </trans-unit>
+            <trans-unit id="list.tags" resname="list.tags">
+                <source>Tags</source>
+            </trans-unit>
             <trans-unit id="post.by" resname="post.by">
                 <source>by %s</source>
             </trans-unit>
