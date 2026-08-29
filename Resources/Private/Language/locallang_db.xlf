@@ -3,6 +3,15 @@
     <file source-language="en" datatype="plaintext" original="EXT:fast_blog/Resources/Private/Language/locallang_db.xlf" date="2026-08-29T00:00:00Z" product-name="fast_blog">
         <header/>
         <body>
+            <trans-unit id="blogpost.tabletitle" resname="blogpost.tabletitle">
+                <source>Blog post</source>
+            </trans-unit>
+            <trans-unit id="tabs.content" resname="tabs.content">
+                <source>Content</source>
+            </trans-unit>
+            <trans-unit id="tabs.meta" resname="tabs.meta">
+                <source>Import / Meta</source>
+            </trans-unit>
             <trans-unit id="blogpost.title" resname="blogpost.title">
                 <source>Title</source>
             </trans-unit>

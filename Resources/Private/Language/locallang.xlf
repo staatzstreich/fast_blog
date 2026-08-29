@@ -21,6 +21,12 @@
             <trans-unit id="post.backToList" resname="post.backToList">
                 <source>Back to overview</source>
             </trans-unit>
+            <trans-unit id="post.readIn" resname="post.readIn">
+                <source>Read in:</source>
+            </trans-unit>
+            <trans-unit id="post.otherLanguages" resname="post.otherLanguages">
+                <source>Other languages</source>
+            </trans-unit>
             <trans-unit id="pagination.previous" resname="pagination.previous">
                 <source>Back</source>
             </trans-unit>

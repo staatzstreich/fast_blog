@@ -24,7 +24,7 @@ use TYPO3\CMS\Seo\Event\ModifyUrlForCanonicalTagEvent;
 /**
  * TYPO3's default canonical URL generator only reflects "loose" query parameters -
  * once a value is absorbed into a route enhancer's PageArguments (as ours are, via
- * StaticRangeMapper/PersistedAliasMapper - see config/sites/staatzstreich/config.yaml),
+ * StaticRangeMapper/PersistedAliasMapper - see the site's config.yaml),
  * it becomes invisible to that logic and the canonical silently falls back to the bare
  * page URL. That's wrong here: a paginated and/or tag-filtered list view is genuinely
  * different content, not a duplicate of the unfiltered page 1.

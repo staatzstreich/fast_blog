@@ -113,6 +113,7 @@ final class ImportBlogPostsCommand extends Command
             $languageUid = $this->resolveLanguageUid((string) ($frontmatter['lang'] ?? ''));
             $translationKey = (string) ($frontmatter['translationKey'] ?? '');
             $title = (string) ($frontmatter['title'] ?? basename($file));
+            $hiddenState = !empty($frontmatter['draft']) ? 1 : 0;
 
             $data = [
                 'pid' => $storagePid,
@@ -127,7 +128,6 @@ final class ImportBlogPostsCommand extends Command
                 'content_html' => (string) $converter->convert($body),
                 'source_file' => $file,
                 'translation_key' => $translationKey,
-                'hidden' => !empty($frontmatter['draft']) ? 1 : 0,
                 'sys_language_uid' => $languageUid,
                 'l10n_parent' => 0,
             ];
@@ -144,12 +144,15 @@ final class ImportBlogPostsCommand extends Command
 
             $existingUid = $this->findExistingUid($file);
             if ($existingUid !== null) {
+                // "hidden" is a backend editorial state - re-importing a file
+                // must not silently unhide (or hide) a record an editor toggled.
+                unset($data['hidden']);
                 $this->updateRecord($existingUid, $data);
                 $blogPostUid = $existingUid;
                 $updated++;
                 $io->writeln(sprintf('Updated: %s (uid %d)', $title, $existingUid));
             } else {
-                $blogPostUid = $this->insertRecord($data);
+                $blogPostUid = $this->insertRecord($hiddenState, $data);
                 $imported++;
                 $io->writeln(sprintf('Imported: %s', $title));
             }
@@ -258,8 +261,9 @@ final class ImportBlogPostsCommand extends Command
     /**
      * @param array<string, mixed> $data
      */
-    private function insertRecord(array $data): int
+    private function insertRecord(int $hiddenState, array $data): int
     {
+        $data['hidden'] = $hiddenState;
         $data['tstamp'] = time();
         $data['crdate'] = time();
         $this->getQueryBuilder()->insert(self::TABLE)->values($data)->executeStatement();
@@ -448,7 +452,13 @@ final class ImportBlogPostsCommand extends Command
 
     private function createMarkdownConverter(): MarkdownConverter
     {
-        $environment = new Environment();
+        // The rendered HTML ends up in content_html and is output unescaped by
+        // Show.html - blog content is editor-supplied via fileadmin, so raw HTML
+        // and unsafe links are stripped/sanitized at import time.
+        $environment = new Environment([
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+        ]);
         $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
 

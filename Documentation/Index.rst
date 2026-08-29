@@ -314,6 +314,47 @@ TYPO3's usual rules - a language displays only with a translated page and
 translated content element.
 
 .. ==================================================
+.. SITEPACKAGE INTEGRATION
+.. ==================================================
+
+.. _h_sitepackage:
+
+Sitepackage integration
+=======================
+
+Fast Blog ships no page chrome and no page templates of its own - it is a
+building block for a sitepackage / theme package:
+
+- **Include the plugin content element**: the "Blog list" element (CType
+  :code:`fastblog_bloglist`) is added to the page where your theme's
+  backend layout renders the main column. No TypoScript include is
+  needed - :code:`configurePlugin()` in :file:`ext_localconf.php` registers
+  the rendering setup automatically.
+- **Feed labels per language**: the extension is translated generically
+  (English sources). A sitepackage can override the wording per project
+  by registering its own XLF files through the ``LANG.resourceOverrides``
+  mechanism in :file:`ext_localconf.php` - one file per language, with the
+  language key (not the locale variant) so ``de-DE``, ``de-AT``, ... all
+  resolve through it:
+
+  .. code-block:: php
+
+     $resourceOverrides = (array) ($GLOBALS['TYPO3_CONF_VARS']['LANG']['resourceOverrides'] ?? []);
+     foreach (['en', 'de', 'ja'] as $language) {
+         $resourceOverrides[$language]['EXT:fast_blog/Resources/Private/Language/locallang.xlf'] = [
+             ...(array) ($resourceOverrides[$language]['EXT:fast_blog/Resources/Private/Language/locallang.xlf'] ?? []),
+             'EXT:sitepackage/Resources/Private/Language/' . $language . '.locallang_fast_blog.xlf',
+         ];
+     }
+     $GLOBALS['TYPO3_CONF_VARS']['LANG']['resourceOverrides'] = $resourceOverrides;
+
+- **Styling**: :file:`Resources/Public/Css/Blog.css` styles the blog itself
+  and maps its color tokens onto the theme's CSS variables
+  (:code:`--color-base-*`, :code:`--color-primary`, ...) with standalone
+  fallbacks, so any theme set (e.g. a daisyUI-based one) can serve as the
+  surrounding chrome.
+
+.. ==================================================
 .. LIMITATIONS
 .. ==================================================
 

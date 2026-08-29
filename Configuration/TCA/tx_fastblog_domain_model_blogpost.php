@@ -17,7 +17,7 @@ declare(strict_types=1);
 
 return [
     'ctrl' => [
-        'title' => 'tx_fastblog_domain_model_blogpost',
+        'title' => 'LLL:EXT:fast_blog/Resources/Private/Language/locallang_db.xlf:blogpost.tabletitle',
         'label' => 'title',
         'label_alt' => 'slug',
         'tstamp' => 'tstamp',
@@ -41,8 +41,8 @@ return [
                 title, slug, pub_date, author,
                 description, meta_description,
                 categories, focus_keywords,
-                --div--:content, bodytext, content_html,
-                --div--:meta, source_file, translation_key,
+                --div--;LLL:EXT:fast_blog/Resources/Private/Language/locallang_db.xlf:tabs.content, bodytext, content_html,
+                --div--;LLL:EXT:fast_blog/Resources/Private/Language/locallang_db.xlf:tabs.meta, source_file, translation_key,
             ',
         ],
     ],

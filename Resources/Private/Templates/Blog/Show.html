@@ -28,8 +28,8 @@
         </div>
 
         <f:if condition="{translations}">
-            <nav class="lang-switch" aria-label="Other languages">
-                <span class="lang-switch-label">Read in:</span>
+            <nav class="lang-switch" aria-label="{f:translate(key: 'post.otherLanguages', extensionName: 'FastBlog')}">
+                <span class="lang-switch-label"><f:translate key="post.readIn" extensionName="FastBlog" /></span>
                 <f:for each="{translations}" as="translation">
                     <a href="{translation.url}" hreflang="{translation.hreflang}">{translation.title}</a>
                 </f:for>

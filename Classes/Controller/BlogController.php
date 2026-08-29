@@ -68,6 +68,10 @@ final class BlogController extends ActionController
             ));
         }
 
+        // The route requirement only enforces "\d+", so "0" is still a valid input -
+        // ArrayPaginator rejects offsets < 1 with an exception. Clamp instead.
+        $page = max(1, $page);
+
         $paginator = new ArrayPaginator($posts, $page, self::POSTS_PER_PAGE);
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
