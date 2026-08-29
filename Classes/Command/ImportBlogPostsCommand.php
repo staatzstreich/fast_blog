@@ -78,7 +78,7 @@ final class ImportBlogPostsCommand extends Command
 
         $storagePid = $this->settings->getBlogStoragePid();
         if ($storagePid <= 0) {
-            $io->error('Keine "blogStoragePid" konfiguriert (Extension-Einstellungen von fast_blog). Bitte den Sysordner für Blogposts anlegen und dessen Seiten-UID dort eintragen.');
+            $io->error('No "blogStoragePid" configured (fast_blog extension settings). Please create the sysfolder for blog posts and put its page UID there.');
 
             return Command::FAILURE;
         }
@@ -86,7 +86,7 @@ final class ImportBlogPostsCommand extends Command
         $directory = rtrim($this->settings->getOutputDirectory(), '/');
         $files = glob($directory . '/*.md') ?: [];
         if ($files === []) {
-            $io->warning(sprintf('Keine Markdown-Dateien in "%s" gefunden.', $directory));
+            $io->warning(sprintf('No Markdown files found in "%s".', $directory));
 
             return Command::SUCCESS;
         }
@@ -99,13 +99,13 @@ final class ImportBlogPostsCommand extends Command
         foreach ($files as $file) {
             $raw = file_get_contents($file);
             if ($raw === false) {
-                $io->warning(sprintf('Konnte Datei nicht lesen: %s', $file));
+                $io->warning(sprintf('Could not read file: %s', $file));
                 continue;
             }
 
             $parsed = $this->splitFrontmatter($raw);
             if ($parsed === null) {
-                $io->warning(sprintf('Kein gültiges YAML-Frontmatter in: %s', $file));
+                $io->warning(sprintf('No valid YAML frontmatter in: %s', $file));
                 continue;
             }
             [$frontmatter, $body] = $parsed;
@@ -147,11 +147,11 @@ final class ImportBlogPostsCommand extends Command
                 $this->updateRecord($existingUid, $data);
                 $blogPostUid = $existingUid;
                 $updated++;
-                $io->writeln(sprintf('Aktualisiert: %s (uid %d)', $title, $existingUid));
+                $io->writeln(sprintf('Updated: %s (uid %d)', $title, $existingUid));
             } else {
                 $blogPostUid = $this->insertRecord($data);
                 $imported++;
-                $io->writeln(sprintf('Importiert: %s', $title));
+                $io->writeln(sprintf('Imported: %s', $title));
             }
 
             $this->writeCategoryRelations($blogPostUid, $categoryUids);
@@ -175,7 +175,7 @@ final class ImportBlogPostsCommand extends Command
             }
         }
 
-        $io->success(sprintf('%d neue, %d aktualisierte Blogpost(s).', $imported, $updated));
+        $io->success(sprintf('%d new, %d updated blog post(s).', $imported, $updated));
 
         return Command::SUCCESS;
     }
