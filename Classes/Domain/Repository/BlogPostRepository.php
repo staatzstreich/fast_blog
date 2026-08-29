@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Michaelstaatz TYPO3 extensions.
+ * This file is part of the michaelstaatz/fast-blog extension.
  *
  * It is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License, either version 2
