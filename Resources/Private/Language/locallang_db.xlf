@@ -1,20 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<xliff version="1.0">
-    <file source-language="de" datatype="plaintext" original="messages" date="2026-07-21T00:00:00Z" product-name="fast_blog">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="EXT:fast_blog/Resources/Private/Language/locallang_db.xlf" date="2026-08-29T00:00:00Z" product-name="fast_blog">
         <header/>
         <body>
-            <trans-unit id="blogpost.title"><source>Titel</source></trans-unit>
-            <trans-unit id="blogpost.slug"><source>Slug (URL)</source></trans-unit>
-            <trans-unit id="blogpost.pub_date"><source>Veröffentlicht am</source></trans-unit>
-            <trans-unit id="blogpost.description"><source>Beschreibung</source></trans-unit>
-            <trans-unit id="blogpost.meta_description"><source>Meta-Description</source></trans-unit>
-            <trans-unit id="blogpost.focus_keywords"><source>Fokus-Keywords (kommagetrennt)</source></trans-unit>
-            <trans-unit id="blogpost.author"><source>Autor</source></trans-unit>
-            <trans-unit id="blogpost.bodytext"><source>Markdown-Quelltext</source></trans-unit>
-            <trans-unit id="blogpost.content_html"><source>Gerenderter HTML-Inhalt</source></trans-unit>
-            <trans-unit id="blogpost.source_file"><source>Quelldatei</source></trans-unit>
-            <trans-unit id="blogpost.translation_key"><source>Übersetzungs-Schlüssel (intern, für den Import)</source></trans-unit>
-            <trans-unit id="blogpost.categories"><source>Tags</source></trans-unit>
+            <trans-unit id="blogpost.title" resname="blogpost.title">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="blogpost.slug" resname="blogpost.slug">
+                <source>Slug (URL)</source>
+            </trans-unit>
+            <trans-unit id="blogpost.pub_date" resname="blogpost.pub_date">
+                <source>Published at</source>
+            </trans-unit>
+            <trans-unit id="blogpost.description" resname="blogpost.description">
+                <source>Description</source>
+            </trans-unit>
+            <trans-unit id="blogpost.meta_description" resname="blogpost.meta_description">
+                <source>Meta description</source>
+            </trans-unit>
+            <trans-unit id="blogpost.focus_keywords" resname="blogpost.focus_keywords">
+                <source>Focus keywords (comma-separated)</source>
+            </trans-unit>
+            <trans-unit id="blogpost.author" resname="blogpost.author">
+                <source>Author</source>
+            </trans-unit>
+            <trans-unit id="blogpost.bodytext" resname="blogpost.bodytext">
+                <source>Markdown source</source>
+            </trans-unit>
+            <trans-unit id="blogpost.content_html" resname="blogpost.content_html">
+                <source>Rendered HTML content</source>
+            </trans-unit>
+            <trans-unit id="blogpost.source_file" resname="blogpost.source_file">
+                <source>Source file</source>
+            </trans-unit>
+            <trans-unit id="blogpost.translation_key" resname="blogpost.translation_key">
+                <source>Translation key (internal, used by the import)</source>
+            </trans-unit>
+            <trans-unit id="blogpost.categories" resname="blogpost.categories">
+                <source>Tags</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>
