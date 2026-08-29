@@ -8,7 +8,7 @@
     <header class="blog-hero">
         <div class="hero-tag">Blog</div>
         <h1>Thoughts &amp; <span>Notes</span></h1>
-        <p class="hero-sub">Sammlung von Ideen, Experimenten und technischen Notizen.</p>
+        <p class="hero-sub"><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:list.tagline" /></p>
     </header>
 
     <div class="blog-layout">
@@ -20,7 +20,7 @@
                         <f:link.action action="show" arguments="{post: post}" class="post-link">
                             <div class="post-meta">
                                 <time><f:format.date format="d.m.Y">{post.pubDate}</f:format.date></time>
-                                <span class="author">von {post.author}</span>
+                                <span class="author"><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:post.by" arguments="{0: post.author}" /></span>
                             </div>
                             <h2>{post.title}</h2>
                             <p class="description">{post.description}</p>
@@ -38,17 +38,17 @@
                 <f:if condition="{paginator.numberOfPages} > 1">
                     <div class="pagination">
                         <f:if condition="{pagination.previousPageNumber}">
-                            <f:link.action action="list" arguments="{page: pagination.previousPageNumber, category: currentCategory}" class="pagination-btn">&#8592; Zurück</f:link.action>
+                            <f:link.action action="list" arguments="{page: pagination.previousPageNumber, category: currentCategory}" class="pagination-btn">&#8592; <f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:pagination.previous" /></f:link.action>
                         </f:if>
                         <f:if condition="!{pagination.previousPageNumber}">
-                            <span class="pagination-btn" aria-disabled="true">&#8592; Zurück</span>
+                            <span class="pagination-btn" aria-disabled="true">&#8592; <f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:pagination.previous" /></span>
                         </f:if>
-                        <span class="pagination-info">Seite {paginator.currentPageNumber} von {paginator.numberOfPages}</span>
+                        <span class="pagination-info"><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:pagination.page" arguments="{0: paginator.currentPageNumber, 1: paginator.numberOfPages}" /></span>
                         <f:if condition="{pagination.nextPageNumber}">
-                            <f:link.action action="list" arguments="{page: pagination.nextPageNumber, category: currentCategory}" class="pagination-btn">Weiter &#8594;</f:link.action>
+                            <f:link.action action="list" arguments="{page: pagination.nextPageNumber, category: currentCategory}" class="pagination-btn"><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:pagination.next" /> &#8594;</f:link.action>
                         </f:if>
                         <f:if condition="!{pagination.nextPageNumber}">
-                            <span class="pagination-btn" aria-disabled="true">Weiter &#8594;</span>
+                            <span class="pagination-btn" aria-disabled="true"><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:pagination.next" /> &#8594;</span>
                         </f:if>
                     </div>
                 </f:if>
@@ -56,9 +56,9 @@
 
             <f:if condition="!{posts}">
                 <div class="no-posts">
-                    <p>Keine Posts gefunden<f:if condition="{currentCategory}"> für den gewählten Tag</f:if>.</p>
+                    <p><f:if condition="{currentCategory}"><f:then><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:list.noPostsForTag" /></f:then><f:else><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:list.noPosts" /></f:else></f:if></p>
                     <f:if condition="{currentCategory}">
-                        <f:link.action action="list" class="clear-filter">Alle Posts anzeigen</f:link.action>
+                        <f:link.action action="list" class="clear-filter"><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:list.allPosts" /></f:link.action>
                     </f:if>
                 </div>
             </f:if>
@@ -70,10 +70,10 @@
                 <span class="filter-label">Tags</span>
                 <div class="filter-tags">
                     <f:if condition="{currentCategory}">
-                        <f:link.action action="list" class="filter-tag">Alle</f:link.action>
+                        <f:link.action action="list" class="filter-tag"><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:list.all" /></f:link.action>
                     </f:if>
                     <f:if condition="!{currentCategory}">
-                        <f:link.action action="list" class="filter-tag active">Alle</f:link.action>
+                        <f:link.action action="list" class="filter-tag active"><f:translate key="LLL:EXT:fast_blog/Resources/Private/Language/locallang.xlf:list.all" /></f:link.action>
                     </f:if>
                     <f:for each="{blogCategories}" as="cat">
                         <f:if condition="{cat.uid} == {currentCategory}">

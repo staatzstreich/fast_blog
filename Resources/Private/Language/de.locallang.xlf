@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="EXT:fast_blog/Resources/Private/Language/locallang.xlf" date="2026-08-29T00:00:00Z" product-name="fast_blog">
+        <header/>
+        <body>
+            <trans-unit id="list.tagline" resname="list.tagline">
+                <source>A collection of ideas, experiments and technical notes.</source>
+                <target>Sammlung von Ideen, Experimenten und technischen Notizen.</target>
+            </trans-unit>
+            <trans-unit id="post.by" resname="post.by">
+                <source>by %s</source>
+                <target>von %s</target>
+            </trans-unit>
+            <trans-unit id="post.backToList" resname="post.backToList">
+                <source>Back to overview</source>
+                <target>Zurück zur Übersicht</target>
+            </trans-unit>
+            <trans-unit id="pagination.previous" resname="pagination.previous">
+                <source>Back</source>
+                <target>Zurück</target>
+            </trans-unit>
+            <trans-unit id="pagination.next" resname="pagination.next">
+                <source>Next</source>
+                <target>Weiter</target>
+            </trans-unit>
+            <trans-unit id="pagination.page" resname="pagination.page">
+                <source>Page %s of %s</source>
+                <target>Seite %s von %s</target>
+            </trans-unit>
+            <trans-unit id="list.noPosts" resname="list.noPosts">
+                <source>No posts found.</source>
+                <target>Keine Posts gefunden.</target>
+            </trans-unit>
+            <trans-unit id="list.noPostsForTag" resname="list.noPostsForTag">
+                <source>No posts found for the selected tag.</source>
+                <target>Keine Posts gefunden für den gewählten Tag.</target>
+            </trans-unit>
+            <trans-unit id="list.allPosts" resname="list.allPosts">
+                <source>Show all posts</source>
+                <target>Alle Posts anzeigen</target>
+            </trans-unit>
+            <trans-unit id="list.all" resname="list.all">
+                <source>All</source>
+                <target>Alle</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
