@@ -1,0 +1,36 @@
+{
+    "name": "michaelstaatz/fast-blog",
+    "type": "typo3-cms-extension",
+    "description": "Fast Blog: imports blog posts from Markdown files (with YAML frontmatter) in fileadmin and renders them as list and detail view.",
+    "license": ["GPL-2.0-or-later"],
+    "keywords": ["TYPO3 CMS"],
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Michael Staatz",
+            "email": "michael@staatzstreich.de",
+            "homepage": "https://staatzstreich.de"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "typo3/cms-core": "^14.0",
+        "typo3/cms-extbase": "^14.0",
+        "typo3/cms-fluid": "^14.0",
+        "typo3/cms-seo": "^14.0",
+        "league/commonmark": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Michaelstaatz\\FastBlog\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "fast_blog",
+            "Package": {
+                "providesPackages": {}
+            }
+        }
+    }
+}

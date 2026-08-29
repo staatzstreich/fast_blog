@@ -1,0 +1,92 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="BlogLayout"/>
+<f:section name="Main">
+
+    <header class="blog-hero">
+        <div class="hero-tag">Blog</div>
+        <h1>Thoughts &amp; <span>Notes</span></h1>
+        <p class="hero-sub">Sammlung von Ideen, Experimenten und technischen Notizen.</p>
+    </header>
+
+    <div class="blog-layout">
+        <div class="posts-grid">
+
+            <f:if condition="{posts}">
+                <f:for each="{posts}" as="post">
+                    <article class="post-card">
+                        <f:link.action action="show" arguments="{post: post}" class="post-link">
+                            <div class="post-meta">
+                                <time><f:format.date format="d.m.Y">{post.pubDate}</f:format.date></time>
+                                <span class="author">von {post.author}</span>
+                            </div>
+                            <h2>{post.title}</h2>
+                            <p class="description">{post.description}</p>
+                            <f:if condition="{post.categories}">
+                                <div class="tags">
+                                    <f:for each="{post.categories}" as="cat">
+                                        <span class="tag">{cat.title}</span>
+                                    </f:for>
+                                </div>
+                            </f:if>
+                        </f:link.action>
+                    </article>
+                </f:for>
+
+                <f:if condition="{paginator.numberOfPages} > 1">
+                    <div class="pagination">
+                        <f:if condition="{pagination.previousPageNumber}">
+                            <f:link.action action="list" arguments="{page: pagination.previousPageNumber, category: currentCategory}" class="pagination-btn">&#8592; Zurück</f:link.action>
+                        </f:if>
+                        <f:if condition="!{pagination.previousPageNumber}">
+                            <span class="pagination-btn" aria-disabled="true">&#8592; Zurück</span>
+                        </f:if>
+                        <span class="pagination-info">Seite {paginator.currentPageNumber} von {paginator.numberOfPages}</span>
+                        <f:if condition="{pagination.nextPageNumber}">
+                            <f:link.action action="list" arguments="{page: pagination.nextPageNumber, category: currentCategory}" class="pagination-btn">Weiter &#8594;</f:link.action>
+                        </f:if>
+                        <f:if condition="!{pagination.nextPageNumber}">
+                            <span class="pagination-btn" aria-disabled="true">Weiter &#8594;</span>
+                        </f:if>
+                    </div>
+                </f:if>
+            </f:if>
+
+            <f:if condition="!{posts}">
+                <div class="no-posts">
+                    <p>Keine Posts gefunden<f:if condition="{currentCategory}"> für den gewählten Tag</f:if>.</p>
+                    <f:if condition="{currentCategory}">
+                        <f:link.action action="list" class="clear-filter">Alle Posts anzeigen</f:link.action>
+                    </f:if>
+                </div>
+            </f:if>
+
+        </div>
+
+        <f:if condition="{blogCategories}">
+            <aside class="tag-sidebar">
+                <span class="filter-label">Tags</span>
+                <div class="filter-tags">
+                    <f:if condition="{currentCategory}">
+                        <f:link.action action="list" class="filter-tag">Alle</f:link.action>
+                    </f:if>
+                    <f:if condition="!{currentCategory}">
+                        <f:link.action action="list" class="filter-tag active">Alle</f:link.action>
+                    </f:if>
+                    <f:for each="{blogCategories}" as="cat">
+                        <f:if condition="{cat.uid} == {currentCategory}">
+                            <f:link.action action="list" arguments="{category: cat}" class="filter-tag active">{cat.title}</f:link.action>
+                        </f:if>
+                        <f:if condition="{cat.uid} != {currentCategory}">
+                            <f:link.action action="list" arguments="{category: cat}" class="filter-tag">{cat.title}</f:link.action>
+                        </f:if>
+                    </f:for>
+                </div>
+            </aside>
+        </f:if>
+    </div>
+
+</f:section>
+</html>

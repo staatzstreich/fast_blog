@@ -1,0 +1,43 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="BlogLayout"/>
+<f:section name="Main">
+
+    <article class="post">
+        <header class="post-header">
+            <div class="post-meta">
+                <time><f:format.date format="d.m.Y">{post.pubDate}</f:format.date></time>
+                <span class="divider">&middot;</span>
+                <span class="author">{post.author}</span>
+            </div>
+            <h1>{post.title}</h1>
+            <p class="description">{post.description}</p>
+            <f:if condition="{post.categories}">
+                <div class="tags">
+                    <f:for each="{post.categories}" as="category">
+                        <span class="tag">{category.title}</span>
+                    </f:for>
+                </div>
+            </f:if>
+        </header>
+
+        <div class="content">
+            <f:format.raw>{post.contentHtml}</f:format.raw>
+        </div>
+
+        <f:if condition="{translations}">
+            <nav class="lang-switch" aria-label="Other languages">
+                <span class="lang-switch-label">Read in:</span>
+                <f:for each="{translations}" as="translation">
+                    <a href="{translation.url}" hreflang="{translation.hreflang}">{translation.title}</a>
+                </f:for>
+            </nav>
+        </f:if>
+
+        <f:link.action action="list" class="back-link">&#8592; Zurück zur Übersicht</f:link.action>
+    </article>
+
+</f:section>
+</html>

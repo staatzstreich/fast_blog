@@ -1,0 +1,11 @@
+# https://git-scm.com/docs/gitattributes
+# Keep the composer/TER distribution package small: development
+# tooling and build output are not needed in the installed package.
+
+/.github export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/.php-cs-fixer.cache export-ignore
+/.php-cs-fixer.php export-ignore
+/RenderedDocs export-ignore
+/RenderedDocs.log* export-ignore

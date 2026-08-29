@@ -1,0 +1,14 @@
+.. More information about this file:
+   https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/GeneralConventions/FileStructure.html#includes-rst-txt
+
+.. ------------------------------------------------------------------
+.. Common labels, anchors, targets and substitutions for this project
+.. ------------------------------------------------------------------
+
+.. _command-reference: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/CommandControllers/Index.html
+
+.. ==================================================
+.. Message placeholders
+.. ==================================================
+
+.. |im-doc| replace:: TYPO3 Documentation
