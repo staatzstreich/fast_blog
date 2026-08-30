@@ -10,7 +10,7 @@
                 <source>Blog list</source>
             </trans-unit>
             <trans-unit id="content_element.bloglist.description" resname="content_element.bloglist.description">
-                <source>Displays imported blog posts: a list with pagination and a tag sidebar, plus the detail view of individual posts.</source>
+                <source>Shows imported blog posts as a paginated list with a tag filter, and the detail view of a single post.</source>
             </trans-unit>
         </body>
     </file>

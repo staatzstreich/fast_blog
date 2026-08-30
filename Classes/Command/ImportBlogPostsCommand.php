@@ -78,7 +78,7 @@ final class ImportBlogPostsCommand extends Command
 
         $storagePid = $this->settings->getBlogStoragePid();
         if ($storagePid <= 0) {
-            $io->error('No "blogStoragePid" configured (fast_blog extension settings). Please create the sysfolder for blog posts and put its page UID there.');
+            $io->error('No "blogStoragePid" configured (fast_blog extension settings). Please create the sysfolder for the blog posts and enter its page UID in the extension settings.');
 
             return Command::FAILURE;
         }

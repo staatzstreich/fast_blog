@@ -23,7 +23,7 @@ defined('TYPO3') or die();
 // configurePlugin()'s docblock still asks for ext_localconf.php specifically (it registers
 // controller actions into $GLOBALS['TYPO3_CONF_VARS'] and auto-generates the
 // "tt_content.fastblog_bloglist = ... EXTBASEPLUGIN" TypoScript) - the rest of this
-// extension avoids ext_localconf.php entirely, this is the one exception.
+// extension avoids ext_localconf.php entirely; this is the only exception.
 ExtensionUtility::configurePlugin(
     'FastBlog',
     'Bloglist',

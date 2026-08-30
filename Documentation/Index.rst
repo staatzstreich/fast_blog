@@ -15,9 +15,9 @@ YAML frontmatter in :file:`fileadmin` and imported into TYPO3 by a CLI
 command. On the website they are displayed with a blog list (pagination and
 tag filter) plus a detail view.
 
-The extension deliberately ships no page chrome (nav, footer, theme):
-that is the job of the active site theme (e.g. a daisyUI-based theme set
-providing the navigation and the color scheme). The blog's stylesheet
+The extension deliberately provides no navigation, footer or color theme
+of its own: that is the job of the active theme set (for example a
+daisyUI-based theme set that provides the navigation and the color scheme). The blog's stylesheet
 maps its color tokens onto the theme's CSS variables - including
 ``data-theme``-driven schemes like daisyUI - with standalone fallbacks,
 so it renders reasonably even without any theme. Post-specific language
@@ -45,7 +45,8 @@ Features
 - **Import command** – :code:`vendor/bin/typo3 fastblog:import` creates or
   updates database records. Re-running it is safe: files are matched by
   their path (:code:`source_file`), so existing records are updated instead
-  of duplicated; obsolete files simply stop being updated.
+  of duplicated; records whose Markdown file has been deleted are simply no
+  longer updated.
 - **Blog content element** – a ready-to-use plugin (CType
   :code:`fastblog_bloglist`) providing a paginated list with tag filter and
   a detail view. Includes the SEO canonical handling for filtered/paginated
@@ -73,7 +74,7 @@ Installation
 
       vendor/bin/typo3 extension:setup
 
-3. In **Settings > Extension configuration > Fast Blog** configure the two
+3. In **Settings > Extension configuration > Fast Blog** configure the
    options below.
 
 .. _configuration:
@@ -205,7 +206,7 @@ Import command
    vendor/bin/typo3 fastblog:import
 
 - Reads every :file:`*.md` file directly inside
-  `outputDirectory` (**not** recursive), converts the body Markdown to
+  `outputDirectory` (**not** recursively), converts the body Markdown to
   HTML via `league/commonmark` and writes/updates the
   :code:`tx_fastblog_domain_model_blogpost` record.
 - Matching of file to record happens via :code:`source_file`, so repeated
@@ -217,8 +218,8 @@ Import command
   :code:`kon-nichihafasutoburogu` - so pretty URLs stay ASCII-safe.
 - Tags are created as sys\_category records on root level (pid 0) and
   related via `sys_category_record_mm`.
-- In TYPO3/DDEV setups this is typically invoked via a system cronjob, the
-  backend scheduler is not required.
+- In TYPO3/DDEV setups this command is typically called from a system
+  cronjob; the backend scheduler module is not required.
 
 .. _h_contentelement:
 
@@ -228,12 +229,15 @@ Blog list content element
 The extension registers the content element :code:`fastblog_bloglist`
 (group `Blog`). Drop it on a page to get:
 
-- **List view** – newest first, 5 posts per page with a simple pagination,
-  tag sidebar listing all categories in use, filterable by tag.
+- **List view** – newest first, paginated (posts per page is configurable
+  through the `postsPerPage` extension setting, default 5) with a simple
+  pagination, a tag sidebar listing all categories in use, filterable by
+  tag.
 - **Detail view** – the post, referenced by its `slug`
   (:file:`/\<page-path\>/\<post-slug\>/` with the route enhancer below),
-  including SEO canonical URL handling for filtered and paginated states
-  and DE↔EN language switching.
+  including SEO canonical URL handling for filtered and paginated views,
+  and a per-post language switcher (shown for every language configured in
+  the site).
 
 Both views are controlled by Fluid templates
 (:file:`Resources/Private/Templates/Blog/` and
@@ -307,15 +311,16 @@ everything from the existing TYPO3 site configuration:
   post - URLs are generated through the site's own routing (including
   your route enhancer), so each language's base URL and slug handling is
   respected automatically. The list view currently leaves language
-  switching to the page chrome (e.g. the theme's navbar): a generic menu
+  switching to the site's general navigation (e.g. the theme's navbar):
+  a generic menu
   cannot link to a translated post (the slug differs per language), so a
   post-specific switcher would be needed there - this may be added as a
   daisyUI dropdown at theme level.
 
 If a site has only one language, everything above is a no-op: all posts
-land in the default language and no switcher is shown. Both sides follow
-TYPO3's usual rules - a language displays only with a translated page and
-translated content element.
+land in the default language and no switcher is shown. Display then
+follows TYPO3's usual rules: a language is shown only if the site has a
+translated page and a translated content element.
 
 .. ==================================================
 .. SITEPACKAGE INTEGRATION
@@ -323,11 +328,11 @@ translated content element.
 
 .. _h_sitepackage:
 
-Sitepackage integration
-=======================
+Site package integration
+========================
 
-Fast Blog ships no page chrome and no page templates of its own - it is a
-building block for a sitepackage / theme package:
+Fast Blog provides no navigation, footer, theme or page templates of its
+own - it is a building block for a site package / theme package:
 
 - **Include the plugin content element**: the "Blog list" element (CType
   :code:`fastblog_bloglist`) is added to the page where your theme's
@@ -355,8 +360,8 @@ building block for a sitepackage / theme package:
 - **Styling**: :file:`Resources/Public/Css/Blog.css` styles the blog itself
   and maps its color tokens onto the theme's CSS variables
   (:code:`--color-base-*`, :code:`--color-primary`, ...) with standalone
-  fallbacks, so any theme set (e.g. a daisyUI-based one) can serve as the
-  surrounding chrome.
+  fallbacks, so any theme set (e.g. a daisyUI-based one) can wrap the
+  blog in its own navigation and styling.
 
 .. ==================================================
 .. LIMITATIONS

@@ -19,7 +19,7 @@
                 <source>Slug (URL)</source>
             </trans-unit>
             <trans-unit id="blogpost.pub_date" resname="blogpost.pub_date">
-                <source>Published at</source>
+                <source>Published on</source>
             </trans-unit>
             <trans-unit id="blogpost.description" resname="blogpost.description">
                 <source>Description</source>

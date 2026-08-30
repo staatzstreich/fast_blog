@@ -1,7 +1,7 @@
 /*
- * Blog styles for fast_blog. Page chrome (nav/footer/theme) comes from the active
- * site theme set (e.g. theme_daisy) - this stylesheet only styles the blog
- * itself.
+ * Blog styles for fast_blog. The surrounding navigation, footer and theme
+ * come from the active site theme set (e.g. theme_daisy) - this stylesheet
+ * only styles the blog itself.
  *
  * The 11 legacy tokens are mapped onto daisyUI/Tailwind variables with
  * standalone fallbacks, so the blog looks right inside any daisyUI theme

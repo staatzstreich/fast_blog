@@ -19,7 +19,7 @@
                     <article class="post-card">
                         <f:link.action action="show" arguments="{post: post}" class="post-link">
                             <div class="post-meta">
-                                <time><f:format.date format="d.m.Y">{post.pubDate}</f:format.date></time>
+                                <time><f:format.date pattern="dd. MMMM yyyy">{post.pubDate}</f:format.date></time>
                                 <span class="author"><f:translate key="post.by" extensionName="FastBlog" arguments="{0: post.author}" /></span>
                             </div>
                             <h2>{post.title}</h2>

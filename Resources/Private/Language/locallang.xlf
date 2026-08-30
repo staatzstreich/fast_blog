@@ -19,16 +19,16 @@
                 <source>by %s</source>
             </trans-unit>
             <trans-unit id="post.backToList" resname="post.backToList">
-                <source>Back to overview</source>
+                <source>Back to all posts</source>
             </trans-unit>
             <trans-unit id="post.readIn" resname="post.readIn">
-                <source>Read in:</source>
+                <source>Also available in:</source>
             </trans-unit>
             <trans-unit id="post.otherLanguages" resname="post.otherLanguages">
                 <source>Other languages</source>
             </trans-unit>
             <trans-unit id="pagination.previous" resname="pagination.previous">
-                <source>Back</source>
+                <source>Previous</source>
             </trans-unit>
             <trans-unit id="pagination.next" resname="pagination.next">
                 <source>Next</source>
