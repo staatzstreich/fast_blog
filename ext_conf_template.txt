@@ -3,3 +3,6 @@ outputDirectory = fileadmin/blog_posts
 
 # cat=basic/2; type=int; label=Page UID of the sysfolder into which "fastblog:import" writes the BlogPost records
 blogStoragePid = 0
+
+# cat=basic/3; type=int; label=Number of blog posts per page in the list view
+postsPerPage = 5

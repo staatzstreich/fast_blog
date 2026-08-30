@@ -42,6 +42,16 @@ final class ExtensionSettings
         return (int) $this->get('blogStoragePid', 0);
     }
 
+    /**
+     * Number of posts shown per page in the paginated list view.
+     * Falls back to 5; a configured value below 1 is clamped so the
+     * paginator never receives an invalid offset.
+     */
+    public function getPostsPerPage(): int
+    {
+        return max(1, (int) $this->get('postsPerPage', 5));
+    }
+
     private function get(string $key, mixed $default): mixed
     {
         try {

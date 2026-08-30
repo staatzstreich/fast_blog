@@ -20,6 +20,7 @@ namespace Michaelstaatz\FastBlog\Controller;
 use Doctrine\DBAL\ParameterType;
 use Michaelstaatz\FastBlog\Domain\Model\BlogPost;
 use Michaelstaatz\FastBlog\Domain\Repository\BlogPostRepository;
+use Michaelstaatz\FastBlog\Service\ExtensionSettings;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
@@ -37,8 +38,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 final class BlogController extends ActionController
 {
-    private const POSTS_PER_PAGE = 5;
-
     /**
      * Route argument namespace of the registered plugin
      * (configurePlugin('FastBlog', 'Bloglist') => tx_fastblog_bloglist).
@@ -48,6 +47,7 @@ final class BlogController extends ActionController
     public function __construct(
         private readonly BlogPostRepository $blogPostRepository,
         private readonly ConnectionPool $connectionPool,
+        private readonly ExtensionSettings $extensionSettings,
     ) {}
 
     public function listAction(?int $category = null, int $page = 1): ResponseInterface
@@ -72,7 +72,7 @@ final class BlogController extends ActionController
         // ArrayPaginator rejects offsets < 1 with an exception. Clamp instead.
         $page = max(1, $page);
 
-        $paginator = new ArrayPaginator($posts, $page, self::POSTS_PER_PAGE);
+        $paginator = new ArrayPaginator($posts, $page, $this->extensionSettings->getPostsPerPage());
         $pagination = new SimplePagination($paginator);
         $this->view->assignMultiple([
             'posts' => $paginator->getPaginatedItems(),

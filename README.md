@@ -42,7 +42,7 @@ translationKey: apples
 The orchard speaks...
 ```
 
-4. Configure the source directory and the storage sysfolder pid in the extension settings (Admin Tools → Settings → Extension Configuration: `outputDirectory` and `blogStoragePid`), then import:
+4. Configure the source directory and the storage sysfolder pid in the extension settings (Admin Tools → Settings → Extension Configuration: `outputDirectory` and `blogStoragePid`; optionally `postsPerPage` for the list length), then import:
 
 ```sh
 vendor/bin/typo3 fastblog:import

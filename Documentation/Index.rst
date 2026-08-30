@@ -96,6 +96,10 @@ Configuration
      - 0
      - Page UID of the sysfolder the blog post records are written to.
        The import refuses to run until a valid UID (greater than 0) is set.
+   * - `postsPerPage`
+     - 5
+     - Number of posts shown per page in the blog list. Values below 1
+       fall back to 5, so the pagination stays valid.
 
 .. _markdown-format:
 
