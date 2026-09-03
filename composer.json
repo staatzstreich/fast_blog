@@ -4,7 +4,6 @@
     "description": "Fast Blog: imports blog posts from Markdown files (with YAML frontmatter) in fileadmin and renders them as a paginated list and a detail view.",
     "license": ["GPL-2.0-or-later"],
     "keywords": ["TYPO3 CMS"],
-    "version": "1.0.0",
     "authors": [
         {
             "name": "Michael Staatz",
