@@ -29,4 +29,9 @@ $EM_CONF[$_EXTKEY] = [
             'seo' => '14.3.0-14.99.99',
         ],
     ],
+    'autoload' => [
+        'psr-4' => [
+            'Michaelstaatz\\FastBlog\\' => 'Classes/',
+        ],
+    ],
 ];
