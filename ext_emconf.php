@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * This file is part of the michaelstaatz/fast-blog extension.
  *
@@ -22,7 +20,7 @@ $EM_CONF[$_EXTKEY] = [
     'author' => 'Michael Staatz',
     'author_email' => '',
     'state' => 'stable',
-    'version' => '1.0.0',
+    'version' => '1.0.1',
     'constraints' => [
         'depends' => [
             'typo3' => '14.3.0-14.99.99',
