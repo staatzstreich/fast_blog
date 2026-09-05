@@ -44,9 +44,9 @@ Features
   files with YAML frontmatter in a `fileadmin` folder of your choice.
 - **Import command** – :code:`vendor/bin/typo3 fastblog:import` creates or
   updates database records. Re-running it is safe: files are matched by
-  their path (:code:`source_file`), so existing records are updated instead
-  of duplicated; records whose Markdown file has been deleted are simply no
-  longer updated.
+  their path (:code:`source_file`, stored relative to the docroot), so
+  existing records are updated instead of duplicated; records whose
+  Markdown file has been deleted are simply no longer updated.
 - **Blog content element** – a ready-to-use plugin (CType
   :code:`fastblog_bloglist`) providing a paginated list with tag filter and
   a detail view. Includes the SEO canonical handling for filtered/paginated
@@ -209,8 +209,10 @@ Import command
   `outputDirectory` (**not** recursively), converts the body Markdown to
   HTML via `league/commonmark` and writes/updates the
   :code:`tx_fastblog_domain_model_blogpost` record.
-- Matching of file to record happens via :code:`source_file`, so repeated
-  runs update in place.
+- Matching of file to record happens via :code:`source_file`, stored
+  relative to the docroot (:code:`Environment::getPublicPath()`), so
+  repeated runs update in place - including after copying the database to
+  a different system whose docroot path differs.
 - Slugs are derived from the title (ASCII-ized, max. 60 chars). If a slug
   is already taken by a different file, a numeric suffix is appended.
   Non-Latin titles are transliterated where possible - a Japanese title
@@ -220,6 +222,11 @@ Import command
   related via `sys_category_record_mm`.
 - In TYPO3/DDEV setups this command is typically called from a system
   cronjob; the backend scheduler module is not required.
+- Installations upgrading from an earlier version may still have absolute
+  paths stored in :code:`source_file`. Run the **fast_blog: Migrate
+  "source_file" to relative paths** upgrade wizard once (backend module
+  *System > Upgrade*) to convert them - otherwise the next import may
+  create duplicates instead of updating those records.
 
 .. _h_contentelement:
 

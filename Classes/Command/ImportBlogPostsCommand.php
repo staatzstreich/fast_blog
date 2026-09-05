@@ -30,6 +30,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Yaml\Yaml;
+use TYPO3\CMS\Core\Core\Environment as CoreEnvironment;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
@@ -92,6 +93,7 @@ final class ImportBlogPostsCommand extends Command
         }
 
         $converter = $this->createMarkdownConverter();
+        $publicPath = rtrim(CoreEnvironment::getPublicPath(), '/');
         $imported = 0;
         $updated = 0;
         $translationPosts = [];
@@ -102,6 +104,11 @@ final class ImportBlogPostsCommand extends Command
                 $io->warning(sprintf('Could not read file: %s', $file));
                 continue;
             }
+
+            // Stored/compared relative to the docroot (not the absolute $file path)
+            // so source_file stays valid across systems with a different docroot,
+            // e.g. copying the database between environments.
+            $relativeFile = ltrim(substr($file, strlen($publicPath)), '/');
 
             $parsed = $this->splitFrontmatter($raw);
             if ($parsed === null) {
@@ -118,7 +125,7 @@ final class ImportBlogPostsCommand extends Command
             $data = [
                 'pid' => $storagePid,
                 'title' => $title,
-                'slug' => $this->resolveSlug($title, $file),
+                'slug' => $this->resolveSlug($title, $relativeFile),
                 'pub_date' => $this->parseDate($frontmatter['pubDate'] ?? null),
                 'description' => (string) ($frontmatter['description'] ?? ''),
                 'meta_description' => (string) ($frontmatter['meta_description'] ?? ''),
@@ -126,7 +133,7 @@ final class ImportBlogPostsCommand extends Command
                 'author' => (string) ($frontmatter['author'] ?? ''),
                 'bodytext' => $body,
                 'content_html' => (string) $converter->convert($body),
-                'source_file' => $file,
+                'source_file' => $relativeFile,
                 'translation_key' => $translationKey,
                 'sys_language_uid' => $languageUid,
                 'l10n_parent' => 0,
@@ -142,7 +149,7 @@ final class ImportBlogPostsCommand extends Command
             $tags = array_map('strval', (array) ($frontmatter['tags'] ?? []));
             $categoryUids = $this->resolveCategoryUids($tags);
 
-            $existingUid = $this->findExistingUid($file);
+            $existingUid = $this->findExistingUid($relativeFile);
             if ($existingUid !== null) {
                 // "hidden" is a backend editorial state - re-importing a file
                 // must not silently unhide (or hide) a record an editor toggled.
