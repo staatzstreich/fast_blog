@@ -1,7 +1,7 @@
 # cat=basic/1; type=string; label=Directory of the Markdown files, relative to the docroot
 outputDirectory = fileadmin/blog_posts
 
-# cat=basic/2; type=int; label=Page UID of the sysfolder into which "fastblog:import" writes the BlogPost records
+# cat=basic/2; type=int; label=Blog Storage Page: Page UID of the sysfolder into which "fastblog:import" writes the BlogPost records
 blogStoragePid = 0
 
 # cat=basic/3; type=int; label=Number of blog posts per page in the list view
