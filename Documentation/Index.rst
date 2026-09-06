@@ -28,7 +28,7 @@ per-post translations, not on the page layout.
 .. TABLE OF CONTENTS
 .. ==================================================
 
-.. contents:: :local:
+.. contents::
    :depth: 2
 
 .. ==================================================
@@ -82,25 +82,23 @@ Installation
 Configuration
 =============
 
-.. list-table::
-   :header-rows: 1
-   :widths: 30 20 50
+``outputDirectory``
+    Default: :file:`fileadmin/blog_posts`
 
-   * - Setting
-     - Default
-     - Description
-   * - `outputDirectory`
-     - :file:`fileadmin/blog\_posts`
-     - Directory of the Markdown files, relative to the web root. Only
-       :file:`*.md` files directly inside this directory are imported.
-   * - `blogStoragePid`
-     - 0
-     - Page UID of the sysfolder the blog post records are written to.
-       The import refuses to run until a valid UID (greater than 0) is set.
-   * - `postsPerPage`
-     - 5
-     - Number of posts shown per page in the blog list. Values below 1
-       fall back to 5, so the pagination stays valid.
+    Directory of the Markdown files, relative to the web root. Only
+    :file:`*.md` files directly inside this directory are imported.
+
+``blogStoragePid``
+    Default: ``0``
+
+    Page UID of the sysfolder the blog post records are written to.
+    The import refuses to run until a valid UID (greater than 0) is set.
+
+``postsPerPage``
+    Default: ``5``
+
+    Number of posts shown per page in the blog list. Values below 1
+    fall back to 5, so the pagination stays valid.
 
 .. _markdown-format:
 
